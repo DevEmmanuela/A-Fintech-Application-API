@@ -50,7 +50,7 @@ class LoginServiceImplTest {
 
 
     @Test
-    void testLogin() throws AuthenticationException, JSONException {
+    void testLogin() throws AuthenticationException, Exception {
         Wallet wallet = new Wallet();
         wallet.setAccountNumber("00912347464");
         wallet.setBalance(null);

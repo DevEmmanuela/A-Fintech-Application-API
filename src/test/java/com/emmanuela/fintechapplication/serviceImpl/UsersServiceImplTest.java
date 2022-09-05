@@ -64,7 +64,7 @@ class UsersServiceImplTest {
     }
 
     @Test
-    void testRegisterUser() throws JSONException {
+    void testRegisterUser() throws Exception {
         doNothing().when(confirmationTokenServiceImpl).saveConfirmationToken((ConfirmationToken) any());
 
         Wallet wallet = new Wallet();
@@ -333,7 +333,7 @@ class UsersServiceImplTest {
 
 
     @Test
-    void testGenerateWallet() throws JSONException {
+    void testGenerateWallet() throws Exception {
         Wallet wallet = new Wallet();
         wallet.setAccountNumber("42");
         wallet.setBalance(null);

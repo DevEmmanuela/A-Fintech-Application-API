@@ -39,7 +39,7 @@ public class UsersController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestPayload loginRequestPayload) throws JSONException {
+    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestPayload loginRequestPayload) throws Exception {
             log.info("successful");
             String token = loginService.login(loginRequestPayload);
             return new ResponseEntity<>(new LoginResponseDto(token),HttpStatus.OK);

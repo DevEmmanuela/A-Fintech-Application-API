@@ -35,9 +35,6 @@ class UsersControllerTest {
     private WalletServiceImpl walletServiceImpl;
 
 
-    /**
-     * Method under test: {@link UsersController#getTransactionHistory(TransactionHistoryPages)}
-     */
     @Test
     void testGetTransactionHistory() throws Exception {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/transactionHistory");

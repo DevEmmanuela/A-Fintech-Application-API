@@ -52,7 +52,7 @@ class RegistrationServiceImplTest {
 
 
     @Test
-    void testRegister() throws JSONException, MailException {
+    void testRegister() throws Exception, MailException {
         when(usersService.registerUser((UsersDTO) any())).thenReturn("Register User");
         when(mailService.sendMail((SendMailDto) any())).thenReturn("Send Mail");
         assertEquals("Please check your email for account activation link.",
@@ -73,7 +73,7 @@ class RegistrationServiceImplTest {
 
 
     @Test
-    void testResendVerificationEmail() throws JSONException, MailException {
+    void testResendVerificationEmail() throws Exception, MailException {
         doNothing().when(usersService).enableUser((String) any());
         doNothing().when(usersService).saveToken((String) any(), (Users) any());
         when(mailService.sendMail((SendMailDto) any())).thenReturn("Send Mail");
@@ -112,7 +112,7 @@ class RegistrationServiceImplTest {
 
 
     @Test
-    void testConfirmToken() throws JSONException {
+    void testConfirmToken() throws Exception {
         Users users = new Users();
         users.setBVN("3425425363");
         users.setCreatedAt(null);

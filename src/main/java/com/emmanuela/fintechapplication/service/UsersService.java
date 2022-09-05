@@ -14,15 +14,11 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import javax.mail.MessagingException;
 
 public interface UsersService {
-    String registerUser(UsersDTO usersDTO) throws JSONException;
+    String registerUser(UsersDTO usersDTO) throws Exception;
     void saveToken(String token, Users user);
-    void enableUser(String email) throws JSONException;
-    Wallet generateWallet(Users user) throws JSONException;
+    void enableUser(String email) throws Exception;
+    Wallet generateWallet(Users user) throws Exception;
     UsersResponse getUser();
-
-//    BaseResponse<Page<TransactionHistoryResponse>>
-//
-//    getTransactionHistory(TransactionHistoryPages transactionHistoryPages);
     void deleteUnverifiedToken(ConfirmationToken token);
 
     BaseResponse<String> generateResetToken(EmailVerifyRequest emailVerifyRequest) throws MessagingException;

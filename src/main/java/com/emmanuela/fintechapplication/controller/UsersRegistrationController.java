@@ -14,12 +14,12 @@ public class UsersRegistrationController {
         public final RegistrationService registrationService;
 
         @PostMapping("/register")
-        public String register(@Valid @RequestBody UsersDTO usersDTO) throws JSONException {
+        public String register(@Valid @RequestBody UsersDTO usersDTO) throws Exception {
             return registrationService.register(usersDTO);
         }
 
         @GetMapping("/confirmToken")
-        public String confirmToken(@RequestParam("token") String token) throws JSONException {
+        public String confirmToken(@RequestParam("token") String token) throws Exception {
             return registrationService.confirmToken(token);
         }
 }

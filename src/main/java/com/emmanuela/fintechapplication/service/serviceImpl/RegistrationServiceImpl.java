@@ -29,7 +29,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final UsersRepository usersRepository;
 
     @Override
-    public String register(UsersDTO usersDTO) throws JSONException {
+    public String register(UsersDTO usersDTO) throws Exception {
         String token = usersService.registerUser(usersDTO);
 
         String link = Constant.EMAIL_VERIFICATION_LINK + token;
@@ -47,7 +47,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public void resendVerificationEmail(Users user) throws JSONException {
+    public void resendVerificationEmail(Users user) throws Exception {
         String token = UUID.randomUUID().toString();
         String link = Constant.EMAIL_VERIFICATION_LINK + token;
         sendMailVerificationLink(user.getFirstName(), user.getEmail(), link);
@@ -56,7 +56,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public String confirmToken(String token) throws JSONException {
+    public String confirmToken(String token) throws Exception {
         ConfirmationToken confirmationToken = confirmationTokenService.getToken(token)
                 .orElseThrow(() -> new TokenNotFoundException("Token not found."));
 

@@ -61,7 +61,7 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
 
 
     @Override
-    public String registerUser(UsersDTO usersDTO) throws JSONException {
+    public String registerUser(UsersDTO usersDTO) throws Exception {
 
         if (!usersDTO.getPassword().equals(usersDTO.getConfirmPassword())) {
             throw new PasswordNotMatchingException("Passwords do not match!");
@@ -109,7 +109,7 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
     }
 
     @Override
-    public Wallet generateWallet(Users user) throws JSONException {
+    public Wallet generateWallet(Users user) throws Exception {
         return walletService.createWallet(user);
     }
 
@@ -154,47 +154,6 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
         }
     }
 
-//    public BaseResponse<Page<TransactionHistoryResponse>> getTransactionHistory(TransactionHistoryPages transactionHistoryPages) throws NullPointerException{
-//        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
-//        Users user = usersRepository.findUsersByEmail(userEmail);
-//
-//        Sort sort = Sort.by(transactionHistoryPages.getSortDirection(), transactionHistoryPages.getSortBy());
-//        Pageable pageable = PageRequest.of(transactionHistoryPages.getPageNumber(), transactionHistoryPages.getPageSize(), sort);
-//
-//        Wallet wallet = walletRepository.findWalletByUsers(user);
-//
-//        String userAccountNumber = wallet.getAccountNumber();
-//
-//        Page<Transaction> transactions = transactionRepository
-//                .findAllBySenderAccountNumberOrDestinationAccountNumber(userAccountNumber, userAccountNumber, pageable);
-//
-//        List<TransactionHistoryResponse> userHistory = new ArrayList<>();
-//
-//        for (Transaction transaction : transactions) {
-//            TransactionHistoryResponse response = mapTransferToTransactionHistoryResponse(userAccountNumber, transaction);
-//            userHistory.add(response);
-//        }
-//
-//        PageImpl<TransactionHistoryResponse> transactionHistoryPage = new PageImpl<>(userHistory, pageable, transactions.getTotalElements());
-//
-//        return new BaseResponse<>(HttpStatus.OK, "Transaction History retrieved", transactionHistoryPage);
-//    }
-//
-//    private TransactionHistoryResponse mapTransferToTransactionHistoryResponse(String userAccountNumber, Transaction transaction) {
-//
-//        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("E, dd-MMMM-yyyy HH:mm");
-//        boolean isSender = userAccountNumber.equals(transaction.getSenderAccountNumber());
-//        String amount = String.format("\u20a6%,.2f",transaction.getAmount());
-//        return TransactionHistoryResponse.builder()
-//                .id(transaction.getId())
-//                .name(isSender ? transaction.getDestinationFullName() : transaction.getSenderFullName())
-//                .bank(isSender ? transaction.getDestinationBank() : transaction.getSenderBankName())
-//                .type(isSender ? TransactionType.DEBIT : TransactionType.CREDIT)
-//                .transactionTime(dateFormat.format(transaction.getCreatedAt()))
-//                .amount(isSender ? "- " + amount : "+ " + amount)
-//                .build();
-//    }
-
     @Override
     public BaseResponse<String> generateResetToken(EmailVerifyRequest emailVerifyRequest) throws MessagingException {
         String email = emailVerifyRequest.getEmail();
@@ -205,7 +164,6 @@ public class UsersServiceImpl implements UsersService, UserDetailsService {
 
 
         String token = jwtUtils.generatePasswordResetToken(user.getEmail());
-//        String url = "//http://localhost:8085/api/v1/resetPassword?token=" + token;
 
         sendPasswordResetEmail(user, token);
         return new BaseResponse<>(HttpStatus.OK,"Check Your Email to Reset Your Password", null);

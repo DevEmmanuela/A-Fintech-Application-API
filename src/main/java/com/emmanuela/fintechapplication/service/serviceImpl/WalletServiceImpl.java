@@ -47,7 +47,7 @@ public class WalletServiceImpl implements WalletService {
     private  String userToken = "";
 
     @Override
-    public Wallet createWallet(Users user) throws JSONException {
+    public Wallet createWallet(Users user) throws Exception {
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();

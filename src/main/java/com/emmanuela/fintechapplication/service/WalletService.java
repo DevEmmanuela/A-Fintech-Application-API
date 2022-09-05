@@ -11,7 +11,7 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 
 public interface WalletService {
 
-    Wallet createWallet(Users walletRequestDetails) throws JSONException;
+    Wallet createWallet(Users walletRequestDetails) throws Exception;
     WalletDto viewWalletDetails();
     void fundWallet(FundAccountRequest fundAccountRequest);
 
