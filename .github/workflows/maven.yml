@@ -30,6 +30,6 @@ jobs:
         image: devemmanuela/fintechapplication
         tags: latest
         registry: docker.io
-        dockerfile: docker/Dockerfile
+        dockerfile: docker/
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
