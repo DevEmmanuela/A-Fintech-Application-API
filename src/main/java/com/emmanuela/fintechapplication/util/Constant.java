@@ -10,7 +10,6 @@ public class Constant {
     public static final String RESOLVE_ACCOUNT_API = "https://api.flutterwave.com/v3/accounts/resolve";
     public static final String OTHER_BANK_TRANSFER = "https://api.flutterwave.com/v3/transfers";
     public static final String STATUS = "PENDING";
-
     public static final String KEYS="secret";
 
     public static final String VERIFY_TRANSFER = "http://localhost:3333/transfer/verify-transfer";
