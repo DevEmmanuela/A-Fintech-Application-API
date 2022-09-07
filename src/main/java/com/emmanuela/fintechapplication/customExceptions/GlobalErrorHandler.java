@@ -150,5 +150,14 @@ public class GlobalErrorHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 
     }
+
+    @ExceptionHandler(InvalidBVNException.class)
+    public ResponseEntity<ErrorResponse> invalidBvn(final InvalidBVNException ex) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(ex.getMessage());
+        errorResponse.setDebugMessage("Invalid BVN");
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+
+    }
 }
 

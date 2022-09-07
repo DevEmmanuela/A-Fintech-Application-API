@@ -1,5 +1,6 @@
 package com.emmanuela.fintechapplication.service.serviceImpl;
 
+import com.emmanuela.fintechapplication.customExceptions.InvalidBVNException;
 import com.emmanuela.fintechapplication.dto.AccountFundDTO;
 import com.emmanuela.fintechapplication.dto.WalletDto;
 import com.emmanuela.fintechapplication.entities.Transaction;
@@ -27,6 +28,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
@@ -48,7 +50,7 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public Wallet createWallet(Users user) throws Exception {
-
+        try{
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -73,6 +75,9 @@ public class WalletServiceImpl implements WalletService {
                 .txRef(payload.getTx_ref())
                 .modifyAt(LocalDateTime.now())
                 .build();
+        } catch (HttpClientErrorException ex){
+            throw new InvalidBVNException(ex.getMessage());
+        }
     }
 
     public void getToken(String token){
